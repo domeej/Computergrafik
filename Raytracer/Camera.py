@@ -22,7 +22,7 @@ class Camera(object):
 
         origin = NP.array([0, 0, 0])
         target = NP.array([0, 3, 0])#
-        up =
+        # up =
         fov = 45
         wres = 400
         hres = 400
