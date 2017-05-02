@@ -3,6 +3,8 @@ import numpy as NP
 class Light(object):
 
     def __init__(self, position):
+
+        #color FEHLT NOCH
         self.position = position
 
     @classmethod

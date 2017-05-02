@@ -1,4 +1,8 @@
-class Sphere(object):
+class Entity(object):
+    #hier noch objektspezifischer code
+    pass
+
+class Sphere(Entity):
     # translation Verschiebungsvektor
     def __init__(self, center, radius, translation, material):
         self.center = center
@@ -7,7 +11,7 @@ class Sphere(object):
         self.material = material
 
 
-class Plane(object):
+class Plane(Entity):
     def __init__(self, point, normal, translation, material):
         # normal gibt an wie die ebene auf dem punkt liegt
         self.point = point
@@ -16,7 +20,7 @@ class Plane(object):
         self.material = material
 
 
-class Triangle(object):
+class Triangle(Entity):
     def __init__(self, a, b, c, translation, material):
         self.a = a
         self.b = b
