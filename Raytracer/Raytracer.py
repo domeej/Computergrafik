@@ -93,7 +93,7 @@ def renderScene(cam, objectlist, lightlist):
 
 def buildScene():
     """creates all the Objects in the Scene"""
-    cam = Camera.Camera(Vector((0, 1.8, 10)), Vector((0, 3, 0)), Vector((0, 1, 0)), 45, 1920, 1080)
+    cam = Camera.Camera(Vector((0, 1.8, 10)), Vector((0, 3, 0)), Vector((0, 1, 0)), 45, 400, 400)
     lightlist = []
     lightlist.append(Vector((30, 30, 10)))
 
