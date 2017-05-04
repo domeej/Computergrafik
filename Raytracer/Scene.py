@@ -1,8 +1,8 @@
-import numpy as NP
+#import numpy as NP
 
-import Camera
-import Light
-from Geometry import Triangle, Plane, Sphere, Material
+#import Camera
+#import Light
+#from Geometry import Triangle, Plane, Sphere, Material
 
 
 class Scene(object):
