@@ -1,6 +1,7 @@
 class Entity(object):
-    #hier noch objektspezifischer code
+    # hier noch objektspezifischer code
     pass
+
 
 class Sphere(Entity):
     # translation Verschiebungsvektor
@@ -12,12 +13,25 @@ class Sphere(Entity):
 
 
 class Plane(Entity):
-    def __init__(self, point, normal, translation, material):
-        # normal gibt an wie die ebene auf dem punkt liegt
+    def __init__(self, point, normal):
         self.point = point
         self.normal = normal
-        self.translation = translation
-        self.material = material
+
+    def __repr__(self):
+        return 'Plane(%s ,%s ) ' % (repr(self.point), repr(self.normal))
+
+    def intersectionParameter(self, ray):
+        op = ray.origin - self.point
+        a = op.dot(self.normal)
+        b = ray.direction.dot(self.normal)
+
+        if b:
+            return -a / b
+        else:
+            return None
+
+    def normalAt(self, p):
+        return self.normal
 
 
 class Triangle(Entity):
@@ -27,11 +41,10 @@ class Triangle(Entity):
         self.c = c
         self.translation = translation
         self.material = material
-        self.u = self.b - self.a #direction vector
-        self.v = self.c - self.a #direction vector
+        self.u = self.b - self.a  # direction vector
+        self.v = self.c - self.a  # direction vector
 
 
 class Material(object):
     def __init__(self, color):
         self.color = color
-
