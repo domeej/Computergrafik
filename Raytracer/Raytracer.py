@@ -99,10 +99,10 @@ def buildScene():
 
     objectlist = []
     plane = Plane(Vector((0, 0, 0)), Vector((0, 1, 0)), CheckerboardMaterial(0.1, 0.8, 1))
-    sphere1 = Sphere(Vector((-1.5, 3, 0)), 1, Material(0.1, 0.8, 1, Vector((255, 0, 0)), 0.3))
-    sphere2 = Sphere(Vector((1.5, 3, 0)), 1, Material(0.1, 0.8, 1, Vector((0, 255, 0)), 0.3))
-    sphere3 = Sphere(Vector((0, 5.5, 0)), 1, Material(0.1, 0.8, 1, Vector((0, 0, 255)), 0.3))
-    triangle = Triangle(Vector((-1.5, 3, 0)), Vector((1.5, 3, 0)), Vector((0, 5.5, 0)), Material(0.1, 0.8, 1, Vector((255, 255, 0))))
+    sphere1 = Sphere(Vector((-1.5, 3, 0)), 1, Material(0.1, 0.8, 0.2, Vector((255, 0, 0)), 0.3))
+    sphere2 = Sphere(Vector((1.5, 3, 0)), 1, Material(0.1, 0.8, 0.2, Vector((0, 255, 0)), 0.3))
+    sphere3 = Sphere(Vector((0, 5.5, 0)), 1, Material(0.1, 0.8, 0.2, Vector((0, 0, 255)), 0.3))
+    triangle = Triangle(Vector((-1.5, 3, 0)), Vector((1.5, 3, 0.2)), Vector((0, 5.5, 0)), Material(0.1, 0.8, 1, Vector((255, 255, 0))))
     objectlist.append(plane)
     objectlist.append(sphere1)
     objectlist.append(sphere2)
