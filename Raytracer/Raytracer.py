@@ -27,7 +27,7 @@ def shade(hitpoint, hitobj, ray, objectlist, lightlist):
         for object in objectlist:
             hitdist = object.intersectionParameter(shadowray)
             if hitdist and hitdist > 0:
-                shadow = True
+                shadow = False
 
         difuse_factor = n.dot(l)
 
@@ -50,7 +50,7 @@ def shade(hitpoint, hitobj, ray, objectlist, lightlist):
     ref_factor = hitobj.material.ref
 
     if ref_factor and ray.level <= max_level:
-        dr = (ray.direction - n.scale((2 * ray.direction.dot(n)))).normalized()
+        dr = (ray.direction - n.scale((2 * ray.direction.dot(n)))).normalized() # spiegleung
         reflectionray = Ray(hitpoint, dr, ray.level + 1) # ray.level gibt rekursionstiefe des ray an
         reflectedcolor = traceRay(reflectionray, objectlist, lightlist)
         color = color.scale(1 - ref_factor) + reflectedcolor.scale(ref_factor)
@@ -93,16 +93,16 @@ def renderScene(cam, objectlist, lightlist):
 
 def buildScene():
     """creates all the Objects in the Scene"""
-    cam = Camera.Camera(Vector((0, 1.8, 10)), Vector((0, 3, 0)), Vector((0, 1, 0)), 45, 400, 400)
+    cam = Camera.Camera(Vector((0, 1.8, 10)), Vector((0, 3, 0)), Vector((0, 1, 0)), 45, 300, 400)
     lightlist = []
-    lightlist.append(Vector((30, 30, 10)))
+    lightlist.append(Vector((30, 30, 50)))
 
     objectlist = []
-    plane = Plane(Vector((0, 0, 0)), Vector((0, 1, 0)), CheckerboardMaterial(0.1, 0.8, 1))
-    sphere1 = Sphere(Vector((-1.5, 3, 0)), 1, Material(0.1, 0.8, 0.2, Vector((255, 0, 0)), 0.3))
-    sphere2 = Sphere(Vector((1.5, 3, 0)), 1, Material(0.1, 0.8, 0.2, Vector((0, 255, 0)), 0.3))
-    sphere3 = Sphere(Vector((0, 5.5, 0)), 1, Material(0.1, 0.8, 0.2, Vector((0, 0, 255)), 0.3))
-    triangle = Triangle(Vector((-1.5, 3, 0)), Vector((1.5, 3, 0.2)), Vector((0, 5.5, 0)), Material(0.1, 0.8, 1, Vector((255, 255, 0))))
+    plane = Plane(Vector((0, 0, 0)), Vector((0, 1, 0)), CheckerboardMaterial(0.5, 0.8, 1))
+    sphere1 = Sphere(Vector((-1.5, 3, 0)), 1, Material(0.3, 0.4, 0.1, Vector((255, 0, 0))))
+    sphere2 = Sphere(Vector((1.5, 3, 0)), 1, Material(0.3, 0.4, 0.1, Vector((0, 255, 0))))
+    sphere3 = Sphere(Vector((0, 5.5, 0)), 1, Material(0.3, 0.4, 0.1, Vector((0, 0, 255))))
+    triangle = Triangle(Vector((-1.5, 3, 0)), Vector((1.5, 3, 0.1)), Vector((0, 5.5, 0)), Material(0.2, 0.4, 1, Vector((255, 255, 0))))
     objectlist.append(plane)
     objectlist.append(sphere1)
     objectlist.append(sphere2)
