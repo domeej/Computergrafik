@@ -22,7 +22,7 @@ def intersect(l1, l2):
     """ returns True if linesegments l1 and l2 intersect. False otherwise."""
     print(l1)
     print(l2)
-    print("----")
+    print("-----")
 
     A = [l1[0][0], l1[0][1]]
     B = [l1[1][0], l1[1][1]]
