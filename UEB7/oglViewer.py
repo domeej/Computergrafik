@@ -4,7 +4,8 @@ from OpenGL.arrays import vbo
 from numpy import array
 import sys, math
 
-
+data = []
+my_vbo = None
 
 def readOBJ(filename):
 
@@ -26,6 +27,8 @@ def readOBJ(filename):
     return (vertices, vertexnormals, faces)
 
 def initGeometryfromFile():
+    global my_vbo, data
+
     if len(sys.argv) == 1:
         print ("keine Objektdatei angegeben!")
         sys.exit(-1)
@@ -34,6 +37,30 @@ def initGeometryfromFile():
 
     # Punkte auslesen
     vertices, vertexnormals, faces = readOBJ(sys.argv[1])
+
+    data = []
+
+    # Create BoundingBox
+    boundingBox = [map(min, zip(*vertices)), map(max, zip(*vertices))]
+    # Calc center of bounding box
+    center = [(x[0] + x[1]) / 2.0 for x in zip(*boundingBox)]
+    # Calc scale factor
+    scaleFactor = 2.0 / max([(x[1] - x[0]) for x in zip(*boundingBox)])
+
+    # get the right data for the vbo
+    for vertex in faces:
+        vn = int(vertex[0]) - 1
+        nn = int(vertex[2]) - 1
+        if vertexnormals:
+            data.append(vertices[vn] + vertexnormals[nn])
+        else:
+            # calc standard normals, if no objectNormals available
+            normals = [x - y for x, y in zip(vertices[vn], center)]
+            l = math.sqrt(normals[0] ** 2 + normals[1] ** 2 + normals[2] ** 2)
+            normals = [x / l for x in normals]
+            data.append(vertices[vn] + normals)
+
+    my_vbo = vbo.VBO(array(data, 'f'))
 
 
 
@@ -50,6 +77,7 @@ def initGL(width, height):
 
 
 def display():
+
     # Clear frame buffer
     glClear(GL_COLOR_BUFFER_BIT)
     # Set color to light gray
@@ -57,11 +85,19 @@ def display():
     # Set draws tyle
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE)
     # Set primitive type to polygon
-    glBegin(GL_POLYGON)
-    for i in range(6):
-        glVertex2f(math.cos(i * math.pi / 3),\
-                   math.sin(i * math.pi / 3))
-    glEnd()
+
+    vbo.bind()
+
+    glVertexPointerf(vbo)
+    glEnableClientState(GL_VERTEX_ARRAY)
+    glDrawArrays(GL_POLYGON, 0, len(data))
+
+    vbo.unbind()
+
+
+    glDisableClientState(GL_VERTEX_ARRAY)
+
+
     # Flush commands
     glFlush()
 
@@ -76,11 +112,14 @@ def main():
     glutDisplayFunc(display)
     # Initialize OpenGL context
     initGL(500, 500)
+
+    initGeometryfromFile()
+
     # Start GLUT mainloop
     glutMainLoop()
 
 
 if __name__ == "__main__":
-    #main()
-    initGeometryfromFile()
+    main()
+
 
