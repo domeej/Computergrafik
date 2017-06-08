@@ -132,7 +132,7 @@ def initGeometryFromObjFile():
         else:
             # calc standard normals, if no objectNormals available
             normals = [x-y for x,y in zip(objectVertices[vn],center)]
-            l = math.sqrt(normals[0]**2 +  normals[1]**2 + normals[2]**2)
+            l = math.sqrt(normals[0]**2 + normals[1]**2 + normals[2]**2)
             normals = [x/l for x in normals]
             data.append(objectVertices[vn] + normals)
 
