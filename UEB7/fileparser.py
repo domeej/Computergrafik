@@ -1,4 +1,5 @@
 def readOBJ(filename):
+    """Liest eine .obj Datei ein und liefert die vertices, normals, faces zurueck"""
     vertices = []
     normals = []
     faces = []

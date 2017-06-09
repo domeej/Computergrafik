@@ -3,7 +3,8 @@ import numpy as np
 
 class Variables:
     def __init__(self):
-        self.DEFAULT_WIDTH, self.DEFAULT_HEIGHT = 500, 500
+        self.DEFAULT_WIDTH = 500
+        self.DEFAULT_HEIGHT = 500
         self.black = (0.0, 0.0, 0.0, 0.0)
         self.white = (1.0, 1.0, 1.0, 0.0)
         self.blue = (0.0, 0.0, 1.0, 0.0)
@@ -19,7 +20,8 @@ class Variables:
         self.my_vbo, self.data = None, None
         self.boundingBox, self.center, self.heightOffset = None, None, 0
 
-        self.displayMode, self.projectionMode, = 's', 'p'
+        self.displayMode = 's'
+        self.projectionMode, = 'p'
         self.objColor = self.blue
         self.shadowColor = (0.1, 0.1, 0.1, 0.0)
 
@@ -139,6 +141,10 @@ class Variables:
     def rotating(self):
         return self.rotating
 
+    @rotating.setter
+    def rotating(self, value):
+        self.rotating = value
+
     @property
     def zooming(self):
         return self.zooming
@@ -183,6 +189,10 @@ class Variables:
     def zoomFactor(self):
         return self.zoomFactor
 
+    @zoomFactor.setter
+    def zoomFactor(self, value):
+        self.zoomFactor = value
+
     @property
     def zoomMin(self):
         return self.zoomMin
@@ -206,3 +216,7 @@ class Variables:
     @property
     def currentOrientation(self):
         return self.currentOrientation
+
+    @currentOrientation.setter
+    def currentOrientation(self, value):
+        self.currentOrientation = value

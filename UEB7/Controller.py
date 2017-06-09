@@ -75,7 +75,7 @@ def mouseMoved(x, y):
                 zoomFactor = zoomMin
             if zoomFactor > zoomMax:
                 zoomFactor = zoomMax
-            setProjection()
+            changeProjection()
 
     if translating:
         scale = float(vpWidth) / 2.0
@@ -143,10 +143,10 @@ def keyPressed(key, x, y):
     if key == 'p':
         if projectionMode == 'o':
             projectionMode = 'p'
-            setProjection()
+            changeProjection()
         elif projectionMode == 'p':
             projectionMode = 'o'
-            setProjection()
+            changeProjection()
 
     if key == 'd':
         if displayMode == 's':
@@ -165,7 +165,7 @@ def keyPressed(key, x, y):
         rotateX, rotateY, rotateZ = 0, 0, 0
         zoomFactor = 1.0
         angle, axis = 0, [0, 0, 1]
-        setProjection()
+        changeProjection()
 
     if key == 'a':
         animate = not animate
