@@ -15,7 +15,7 @@ green = (0.0,1.0,0.0,0.0)
 yellow = (1.0,1.0,0.0,0.0)
 red = (1.0,0.0,0.0,0.0)
 
-my_vbo, data = None, None
+the_vbo, data = None, None
 boundingBox, center, heightOffset = None, None, 0
 
 fov = 45.0
@@ -69,7 +69,7 @@ def initGL():
 
 def initGeometry():
 
-    global my_vbo, data, boundingBox, center, scaleFactor, heightOffset
+    global the_vbo, data, boundingBox, center, scaleFactor, heightOffset
 
     vertices, normals, faces = loadOBJ(sys.argv[1])
     data = []
@@ -210,7 +210,7 @@ def resize(width, height):
 
 def display():
 
-    global my_vbo, data
+    global the_vbo, data
     global displayMode, shadow, light
     global scaleFactor, center, heightOffset, rotateX, rotateY, rotateZ, posX, posY
 
