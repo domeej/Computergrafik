@@ -1,0 +1,11 @@
+uniform float timeStep;
+
+varying vec3 normal;
+
+void main()
+{
+    vec4 v = vec4(gl_Vertex);
+    v.x =v.x * (sin(timeStep * 6.28)*cos(timeStep * 6.28)+1.0);
+    gl_Position = gl_ModelViewProjectionMatrix * v;
+    normal = gl_NormalMatrix * gl_Normal;
+} 

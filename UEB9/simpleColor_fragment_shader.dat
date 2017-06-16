@@ -1,0 +1,8 @@
+varying vec3 normal;
+
+void main()
+{
+    vec3 n = normalize(normal);
+    vec4 color = vec4(n, 1.0);
+    gl_FragColor = color;
+} 

@@ -144,7 +144,7 @@ def changeProjection():
 def resize(width, height):
     """Wird aufgerufen sobald das Window veraendert wird"""
     global vpWidth, vpHeight
-
+    #verhindert division durch 0
     if height == 0:
         height = 1
 
