@@ -21,35 +21,6 @@ k = 4 # Polynomgrad
 m = 20 # Anzahl Splines
 
 
-def get_color():
-    """Color-Picker für Strichfarbe"""
-    global BCOLOR
-    color = askcolor()
-    BCOLOR = color[1]
-    draw()
-
-
-def set_draw_sample_points():
-    """interpolierte Kontrollpunkte zeichnen"""
-    global draw_sample_points
-    draw_sample_points = not draw_sample_points
-    draw()
-
-
-def set_m(new_m):
-    """setzen der Anzahl von Splines"""
-    global m
-    m = int(new_m)
-    draw()
-
-
-def set_k(new_k):
-    """Setzen des gewünschten Polynomgrads"""
-    global k
-    k = int(new_k)
-    draw()
-
-
 def draw_points(points, color):
     """ Zeichnen der (interpolierten) Kontrollpunkte """
     global elementList
@@ -83,7 +54,7 @@ def draw_bezier_curve():
 
         for i in range(m + 1):
             t = (float(i) / m) * knotvector[-1]
-            deboor_points.append(start_deboor(k - 1, pointList, knotvector, t))
+            deboor_points.append(init_deboor(k - 1, pointList, knotvector, t))
 
         # interpolierten Punkte sollen gezeichnet werden
         if draw_sample_points:
@@ -113,7 +84,7 @@ def deboor(j, i, degree, controlpoints, knotvector, t):
     return [x[0] + x[1] for x in zip(b1, b2)]
 
 
-def start_deboor(degree, controlpoints, knotvector, t):
+def init_deboor(degree, controlpoints, knotvector, t):
     r = None
 
     #drunter?
@@ -127,6 +98,34 @@ def start_deboor(degree, controlpoints, knotvector, t):
             break
     return deboor(degree, r, degree, controlpoints, knotvector, t)
 
+
+def get_color():
+    """Color-Picker für Strichfarbe"""
+    global BCOLOR
+    color = askcolor()
+    BCOLOR = color[1]
+    draw()
+
+
+def set_draw_sample_points():
+    """interpolierte Kontrollpunkte zeichnen"""
+    global draw_sample_points
+    draw_sample_points = not draw_sample_points
+    draw()
+
+
+def set_m(new_m):
+    """setzen der Anzahl von Splines"""
+    global m
+    m = int(new_m)
+    draw()
+
+
+def set_k(new_k):
+    """Setzen des gewünschten Polynomgrads"""
+    global k
+    k = int(new_k)
+    draw()
 
 def quit(root=None):
     """ quit programm """
